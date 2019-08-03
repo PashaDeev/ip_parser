@@ -3,6 +3,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import WebDriverException
 from bs4 import BeautifulSoup
 import urllib.parse as urllib
 from pprint import pprint
@@ -40,13 +41,20 @@ def get_html(url, proxy, user_agent, need_element='*'):
         driver = webdriver.Firefox(firefox_profile=profile, options=options)
     else:
         driver = webdriver.Firefox(options=options)
-    driver.set_page_load_timeout(10)
-    driver.get(url)
-    print(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))
-    driver.implicitly_wait(60)
-    driver.find_element_by_class_name(need_element)
-    html = driver.find_element_by_tag_name('body')
-    html = html.get_attribute('innerHTML')
+    
+    try:
+        driver.set_page_load_timeout(10)
+        driver.get(url)
+        print(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))
+        driver.implicitly_wait(60)
+        driver.find_element_by_class_name(need_element)
+        html = driver.find_element_by_tag_name('body')
+        html = html.get_attribute('innerHTML')
+    except WebDriverException:
+        print('error')
+        html = driver.find_element_by_tag_name('body')
+        html = html.get_attribute('innerHTML')
+        print('html', html)
     driver.close()
     return BeautifulSoup(html, 'lxml')
 
