@@ -44,7 +44,7 @@ if __name__ == '__main__':
     #     urls = get_urls_to_parse(int(page_count), last_index, 'h')
 
 
-    proxies = get_proxy_from_file('proxies_https.csv')
+    # proxies = get_proxy_from_file('proxies_https.csv')
 
     http_proxies = []
     https_proxies = []
@@ -54,7 +54,7 @@ if __name__ == '__main__':
         if len(http_proxies) >= 0:
             html = get_html(urls_http[i], None, None, 'proxy__t')
         else:
-            html = get_html(urls_http[i], proxies[i], None, 'proxy__t')
+            html = get_html(urls_http[i], None, None, 'proxy__t')
         new_proxies = get_proxy(html)
         http_proxies = http_proxies + new_proxies
 
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         if len(https_proxies) >= 0:
             html = get_html(urls_https[i], None, None, 'proxy__t')
         else:
-            html = get_html(urls_https[i], proxies[i], None, 'proxy__t')
+            html = get_html(urls_https[i], None, None, 'proxy__t')
         new_proxies = get_proxy(html)
         https_proxies = https_proxies + new_proxies
 
