@@ -2152,3 +2152,32 @@ JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: lo
 1564829928004	Marionette	WARN	TLS certificate errors will be ignored for this session
 1564829933275	Marionette	INFO	Stopped listening on port 62473
 JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: localStorage is null
+1564833614243	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/jn/p7wr_nzn0pv01_tr1gy3y9b00000gq/T/rust_mozprofile.9hMsaLMjCivi"
+*** You are running in headless mode.
+1564833615036	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1564833615036	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1564833615036	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1564833615037	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1564833617512	Marionette	INFO	Listening on port 63001
+1564833617604	Marionette	WARN	TLS certificate errors will be ignored for this session
+1564833622676	Marionette	INFO	Stopped listening on port 63001
+1564833630443	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/jn/p7wr_nzn0pv01_tr1gy3y9b00000gq/T/rust_mozprofile.dfQr42t6TDJ5"
+*** You are running in headless mode.
+1564833631082	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1564833631082	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1564833631082	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1564833631083	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1564833633342	Marionette	INFO	Listening on port 63062
+1564833633403	Marionette	WARN	TLS certificate errors will be ignored for this session
+1564833638493	Marionette	INFO	Stopped listening on port 63062
+JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: localStorage is null
+1564833644241	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/jn/p7wr_nzn0pv01_tr1gy3y9b00000gq/T/rust_mozprofile.dCJfBXV83JRb"
+*** You are running in headless mode.
+1564833644900	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1564833644900	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1564833644900	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1564833644900	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1564833647508	Marionette	INFO	Listening on port 63119
+1564833647538	Marionette	WARN	TLS certificate errors will be ignored for this session
+1564833652636	Marionette	INFO	Stopped listening on port 63119
+JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: localStorage is null

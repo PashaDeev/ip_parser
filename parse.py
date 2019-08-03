@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
+from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 import urllib.parse as urllib
 from pprint import pprint
@@ -9,6 +10,9 @@ from pprint import pprint
 PROXY_IN_PAGE = 64
 BASE_URL = 'https://hidemyna.me'
 IP_TITLES = ('ip', 'port')
+
+options = Options()
+options.set_headless()
 
 def get_html(url, proxy, user_agent, need_element='*'):
     if proxy != None:
@@ -31,9 +35,9 @@ def get_html(url, proxy, user_agent, need_element='*'):
         profile.set_preference("network.proxy.ssl_port", int(proxy['port']))
         # profile.set_preference("general.useragent.override", "Opera/9.80 (Macintosh; PPC Mac OS X; U; en) Presto/2.6 Version/10.63")
         profile.update_preferences()
-        driver = webdriver.Firefox(firefox_profile=profile)
+        driver = webdriver.Firefox(firefox_profile=profile, options=options)
     else:
-        driver = webdriver.Firefox()
+        driver = webdriver.Firefox(options=options)
     driver.set_page_load_timeout(10)
     driver.get(url)
     driver.implicitly_wait(10)
