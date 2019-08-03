@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import urllib.parse as urllib
 from pprint import pprint
 
-frim time import sleep
+from time import sleep
 
 PROXY_IN_PAGE = 64
 BASE_URL = 'https://hidemyna.me'
