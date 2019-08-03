@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 import urllib.parse as urllib
 from pprint import pprint
 
+frim time import sleep
+
 PROXY_IN_PAGE = 64
 BASE_URL = 'https://hidemyna.me'
 IP_TITLES = ('ip', 'port')
@@ -41,7 +43,8 @@ def get_html(url, proxy, user_agent, need_element='*'):
     driver.set_page_load_timeout(10)
     driver.get(url)
     print(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))
-    driver.implicitly_wait(60)
+    # driver.implicitly_wait(60)
+    sleep(12)
     driver.find_element_by_class_name(need_element)
     html = driver.find_element_by_tag_name('body')
     html = html.get_attribute('innerHTML')
