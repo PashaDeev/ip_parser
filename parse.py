@@ -40,7 +40,7 @@ def get_html(url, proxy, user_agent, need_element='*'):
         driver = webdriver.Firefox(options=options)
     driver.set_page_load_timeout(10)
     driver.get(url)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(20)
     driver.find_element_by_class_name(need_element)
     html = driver.find_element_by_tag_name('body')
     html = html.get_attribute('innerHTML')

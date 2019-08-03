@@ -2181,3 +2181,12 @@ JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: lo
 1564833647538	Marionette	WARN	TLS certificate errors will be ignored for this session
 1564833652636	Marionette	INFO	Stopped listening on port 63119
 JavaScript error: https://hidemyna.me/media/js/newjs.js, line 136: TypeError: localStorage is null
+1564835313028	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/var/folders/jn/p7wr_nzn0pv01_tr1gy3y9b00000gq/T/rust_mozprofile.0CnKOanIqw4T"
+*** You are running in headless mode.
+1564835313771	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1564835313771	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1564835313771	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1564835313771	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1564835316224	Marionette	INFO	Listening on port 63426
+1564835316307	Marionette	WARN	TLS certificate errors will be ignored for this session
+1564835363236	Marionette	INFO	Stopped listening on port 63426
