@@ -20,11 +20,6 @@ else:
     CURRENT_URL = HTTPS_URL
 
 
-
-
-
-CURRENT_URL = 'https://www.bolshoi.ru/'
-
 if __name__ == '__main__':
     html = get_html(CURRENT_URL, None, None, 'proxy__t')
 
