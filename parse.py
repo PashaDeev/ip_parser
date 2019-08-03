@@ -48,8 +48,11 @@ def get_html(url, proxy, user_agent, need_element='*'):
         print(driver.find_element_by_tag_name('body').get_attribute('innerHTML'))
         driver.implicitly_wait(60)
         driver.find_element_by_class_name(need_element)
+        print('found')
         html = driver.find_element_by_tag_name('body')
+        print('body')
         html = html.get_attribute('innerHTML')
+        print('innder')
     except WebDriverException:
         print('error')
         html = driver.find_element_by_tag_name('body')
