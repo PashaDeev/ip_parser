@@ -1,0 +1,30 @@
+{
+  "name": "ip_parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WD-man/ip_parser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WD-man/ip_parser/issues"
+  },
+  "homepage": "https://github.com/WD-man/ip_parser#readme",
+  "devDependencies": {
+    "@types/node": "13.1.1",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.7.4"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.3"
+  }
+}
