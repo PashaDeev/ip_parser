@@ -3,3 +3,5 @@ geckodriver.log
 node_modules
 dist
 .idea
+http.csv
+https.csv
