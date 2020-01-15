@@ -5,3 +5,4 @@ dist
 .idea
 http.csv
 https.csv
+*.log

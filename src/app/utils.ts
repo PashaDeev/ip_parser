@@ -1,4 +1,5 @@
 import { Builder, until, By, Capabilities } from 'selenium-webdriver';
+import pino from 'pino';
 import { join } from 'path';
 import { stringify, parse as csvParse } from 'csv';
 import { outputFile, readFile } from 'fs-extra';
@@ -9,6 +10,8 @@ import { Options } from 'selenium-webdriver/firefox';
 import { range } from 'underscore';
 
 import { PROXY_IN_PAGE } from '../constant';
+
+const logger = pino({level: process.env.LOG_LEVEL || 'info'});
 
 const getHTML = async (
   url: string,
@@ -23,14 +26,14 @@ const getHTML = async (
 
   let str;
   try {
-    console.log('page getting ...');
+    logger.info('page getting ...');
     await driver.get(url);
     await driver.wait(until.elementLocated(By.css('.pagination')), 20000);
-    console.log('html getting ...');
+    logger.info('html getting ...');
     str = await driver.findElement(By.css('body')).getAttribute('innerHTML');
   } catch (err) {
     if (err.name !== 'TimeoutError') {
-      console.error(err);
+      logger.info(err);
     }
   } finally {
     await driver.quit();
@@ -80,10 +83,8 @@ export const get = async (url: string): Promise<CheerioStatic | null> => {
       res = null;
       break;
     }
-    console.log(`-------------------------`);
-    console.count(`try`);
-    console.log('ip', IP);
-    console.log(`-------------------------`);
+    // logger.listenerCount(`try`);
+    logger.info('try with ip', IP);
     res = await getHTML(url, IP);
     if (!res) {
       proxyGenerator.next();

@@ -1,3 +1,4 @@
+import pino from 'pino';
 import {
   get,
   getLastPaginationIndex,
@@ -8,6 +9,8 @@ import {
 } from './utils';
 
 import { SOCKS_URL } from '../constant';
+
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 
 const getProxies = async (pageLimit = 1) => {
   const lastIndex = await getLastPaginationIndex(SOCKS_URL);
@@ -26,17 +29,12 @@ const getProxies = async (pageLimit = 1) => {
 };
 
 export const app = async () => {
-  console.log('start');
+  logger.info('start');
   await proxyGenerator.init();
-  console.log('------------ socks start ------------');
+  logger.info('------------ socks start ------------');
   const httpsProxies = await getProxies(3);
-  console.log(`socks5`, httpsProxies);
+  logger.info(`socks5 ${httpsProxies}`);
   await write(httpsProxies, 'socks5');
-  console.log('------------ socks end ------------');
-  // console.log('------------ http start ------------');
-  // const httpProxies = await getProxies('h', 3);
-  // console.log(`http`, httpProxies);
-  // await write(httpProxies, 'http');
-  // console.log('------------ http end ------------');
-  console.log(`end`);
+  logger.info('------------ socks end ------------');
+  logger.info(`end`);
 };
