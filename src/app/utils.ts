@@ -1,10 +1,11 @@
 import { Builder, until, By, Capabilities } from 'selenium-webdriver';
 import { join } from 'path';
-import { stringify } from 'csv';
-import { outputFile } from 'fs-extra';
+import { stringify, parse as csvParse } from 'csv';
+import { outputFile, readFile } from 'fs-extra';
 import cheerio from 'cheerio';
 // @ts-ignore
 import proxy from 'selenium-webdriver/proxy';
+import { Options } from 'selenium-webdriver/firefox';
 import { range } from 'underscore';
 
 import { PROXY_IN_PAGE } from '../constant';
@@ -13,41 +14,81 @@ const getHTML = async (
   url: string,
   ip: string
 ): Promise<CheerioStatic | null> => {
-  let driver = await new Builder()
+  const driver = await new Builder()
     .withCapabilities(Capabilities.firefox())
-    .setProxy(proxy.manual({ https: ip }))
+    .setFirefoxOptions(new Options().headless())
+    // .setProxy(proxy.manual({ https: ip }))
+    .setProxy(proxy.socks(ip, 5))
     .build();
 
   let str;
   try {
+    console.log('page getting ...');
     await driver.get(url);
     await driver.wait(until.elementLocated(By.css('.pagination')), 20000);
-    // await new Promise(res => setTimeout(res, 10000));
+    console.log('html getting ...');
     str = await driver.findElement(By.css('body')).getAttribute('innerHTML');
+  } catch (err) {
+    if (err.name !== 'TimeoutError') {
+      console.error(err);
+    }
   } finally {
     await driver.quit();
   }
   return str ? cheerio.load(str) : null;
 };
 
-function* proxyGenerator(): Generator<string> {
-  let i = 0;
-  while (true) {
-    yield '87.255.70.183:8080';
+class ProxyGenerator {
+  currentIndex: number;
+  proxies: Array<string[]>;
+
+  constructor() {
+    this.currentIndex = 0;
+    this.proxies = [];
+  }
+
+  public async init() {
+    const file = await readFile(join(process.cwd(), 'socks5.csv'));
+    let res: Function;
+    const promise = new Promise(r => (res = r));
+    csvParse(file, (err, output) => {
+      this.proxies.push(...output);
+      res();
+    });
+    await promise;
+  }
+
+  public get(): string {
+    return this.proxies[this.currentIndex].join(':');
+  }
+
+  public next() {
+    this.currentIndex += 1;
   }
 }
 
-export const get = async (url: string): Promise<CheerioStatic | null> => {
-  const getNextProxy = proxyGenerator();
-  const IP = getNextProxy.next().value;
+export const proxyGenerator = new ProxyGenerator();
 
+export const get = async (url: string): Promise<CheerioStatic | null> => {
   const tries = 3;
   let res;
-  let i = tries;
+  let i = 0;
 
-  while (!res && i >= 0) {
+  while (!res && i < proxyGenerator.proxies.length) {
+    const IP = proxyGenerator.get();
+    if (!IP) {
+      res = null;
+      break;
+    }
+    console.log(`-------------------------`);
+    console.count(`try`);
+    console.log('ip', IP);
+    console.log(`-------------------------`);
     res = await getHTML(url, IP);
-    i--;
+    if (!res) {
+      proxyGenerator.next();
+    }
+    i++;
   }
 
   i = tries;
@@ -66,14 +107,13 @@ export const getLastPaginationIndex = async (url: string) => {
 export const getUrlsToParse = (
   count: number,
   lastIndex: number,
-  type: string
 ) => {
   if (PROXY_IN_PAGE * count > lastIndex * PROXY_IN_PAGE) {
     count = lastIndex;
   }
 
   return range(0, count).map((item, index) => {
-    return `https://hidemyna.me/ru/proxy-list/?type=${type}?start=${PROXY_IN_PAGE *
+    return `https://hidemyna.me/ru/proxy-list/?type=5?start=${PROXY_IN_PAGE *
       index}#list`;
   });
 };

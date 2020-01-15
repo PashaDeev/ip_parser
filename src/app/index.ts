@@ -1,19 +1,24 @@
-import { get, getLastPaginationIndex, getUrlsToParse, parse, write } from './utils';
+import {
+  get,
+  getLastPaginationIndex,
+  getUrlsToParse,
+  parse,
+  write,
+  proxyGenerator,
+} from './utils';
 
-import { HTTPS_URL, HTTP_URL } from '../constant';
+import { SOCKS_URL } from '../constant';
 
-const getProxies = async (type: string) => {
-  const lastIndex = await getLastPaginationIndex(
-    type === 's' ? HTTPS_URL : HTTP_URL
-  );
+const getProxies = async (pageLimit = 1) => {
+  const lastIndex = await getLastPaginationIndex(SOCKS_URL);
   console.log('last index', lastIndex);
-  const urls = getUrlsToParse(1, lastIndex, type);
+  const urls = getUrlsToParse(pageLimit, lastIndex);
 
   console.log('urls', urls);
 
   const proxies: Array<string[]> = [];
   for (const url of urls) {
-    const res = await get(type === 's' ? HTTPS_URL : HTTP_URL);
+    const res = await get(SOCKS_URL);
     const current = parse(res);
     proxies.push(...current);
   }
@@ -22,15 +27,16 @@ const getProxies = async (type: string) => {
 
 export const app = async () => {
   console.log('start');
-  console.log('------------ https start ------------');
-  const httpsProxies = await getProxies('s');
-  console.log(`https`, httpsProxies);
-  await write(httpsProxies, 'https');
-  console.log('------------ https end ------------');
-  console.log('------------ http start ------------');
-  const httpProxies = await getProxies('h');
-  console.log(`http`, httpProxies);
-  await write(httpProxies, 'http');
-  console.log('------------ http end ------------');
+  await proxyGenerator.init();
+  console.log('------------ socks start ------------');
+  const httpsProxies = await getProxies(3);
+  console.log(`socks5`, httpsProxies);
+  await write(httpsProxies, 'socks5');
+  console.log('------------ socks end ------------');
+  // console.log('------------ http start ------------');
+  // const httpProxies = await getProxies('h', 3);
+  // console.log(`http`, httpProxies);
+  // await write(httpProxies, 'http');
+  // console.log('------------ http end ------------');
   console.log(`end`);
 };
