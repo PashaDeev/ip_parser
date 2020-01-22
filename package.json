@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/WD-man/ip_parser#readme",
   "devDependencies": {
+    "@types/chai": "4.2.7",
     "@types/cheerio": "0.22.15",
     "@types/fs-extra": "8.0.1",
     "@types/node": "13.1.1",
