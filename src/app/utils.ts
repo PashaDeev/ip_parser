@@ -98,11 +98,6 @@ export const get = async (url: string): Promise<CheerioStatic | null> => {
 
 export const getLastPaginationIndex = async (url: string) => {
   const $ = await get(url);
-  return Number(
-    $('.pagination ul li')
-      .eq(-2)
-      .text()
-  );
 };
 
 export const getUrlsToParse = (
