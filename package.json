@@ -40,7 +40,7 @@
     "pino": "5.16.0",
     "pino-pretty": "3.5.0",
     "selenium-webdriver": "4.0.0-alpha.5",
-    "underscore": "1.9.1"
+    "underscore": "1.12.1"
   },
   "prettier": {
     "trailingComma": "es5",
